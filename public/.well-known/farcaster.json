@@ -7,9 +7,9 @@
   "miniapp": {
     "version": "1",
     "name": "Pebble",
-    "homeUrl": "https://pebble-miniapp.vercel.app/",
-    "iconUrl": "https://pebble-miniapp.vercel.app/assets/icon.png",
-    "splashImageUrl": "https://pebble-miniapp.vercel.app/assets/splash.png",
+    "homeUrl": "https://pebble-xi.vercel.app/",
+    "iconUrl": "https://pebble-xi.vercel.app/assets/icon.png",
+    "splashImageUrl": "https://pebble-xi.vercel.app/assets/splash.png",
     "splashBackgroundColor": "#000000",
     "subtitle": "Tap your daily vibe.",
     "description": "Pebble is a tiny daily ritual: tap your mood once a day and watch your colors stack up over time.",
@@ -19,13 +19,13 @@
       "mood",
       "social"
     ],
-    "heroImageUrl": "https://pebble-miniapp.vercel.app/assets/hero.png",
+    "heroImageUrl": "https://pebble-xi.vercel.app/assets/hero.png",
     "tagline": "Tap your daily vibe.",
     "ogTitle": "Pebble",
     "ogDescription": "Pebble is a tiny daily ritual: tap your mood once a day and watch your colors stack up over time.",
-    "ogImageUrl": "https://pebble-miniapp.vercel.app/assets/hero.png",
+    "ogImageUrl": "https://pebble-xi.vercel.app/assets/hero.png",
     "screenshotUrls": [
-      "https://pebble-miniapp.vercel.app/assets/screenshot-1.png"
+      "https://pebble-xi.vercel.app/assets/screenshot-1.png"
     ],
     "noindex": true
   }
