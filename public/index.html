@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Pebble</title>
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Pebble" />
+  <meta property="og:description" content="Pebble is a tiny daily ritual: tap your mood once a day and watch your colors stack up over time." />
+  <meta property="og:image" content="https://pebble-miniapp.vercel.app/assets/hero.png" />
+  <meta property="og:url" content="https://pebble-miniapp.vercel.app/" />
+  <meta property="og:type" content="website" />
+
+  <!-- Farcaster Mini App embed -->
+  <meta
+    name="fc:miniapp"
+    content='{
+      "version":"1",
+      "imageUrl":"https://pebble-miniapp.vercel.app/assets/embed-3x2.png",
+      "button":{
+        "title":"Pebble",
+        "action":{
+          "type":"launch_frame",
+          "name":"Pebble",
+          "url":"https://pebble-miniapp.vercel.app/",
+          "splashImageUrl":"https://pebble-miniapp.vercel.app/assets/splash.png",
+          "splashBackgroundColor":"#000000"
+        }
+      }
+    }'
+  />
+
+  <!-- Backward-compatible Frame meta -->
+  <meta
+    name="fc:frame"
+    content='{
+      "version":"1",
+      "imageUrl":"https://pebble-miniapp.vercel.app/assets/embed-3x2.png",
+      "button":{
+        "title":"Pebble",
+        "action":{
+          "type":"launch_frame",
+          "name":"Pebble",
+          "url":"https://pebble-miniapp.vercel.app/",
+          "splashImageUrl":"https://pebble-miniapp.vercel.app/assets/splash.png",
+          "splashBackgroundColor":"#000000"
+        }
+      }
+    }'
+  />
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: radial-gradient(circle at top, #1f2937, #020617);
+      color: #f9fafb;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+    }
+    .card {
+      background: rgba(15, 23, 42, 0.9);
+      border-radius: 24px;
+      padding: 24px 20px;
+      max-width: 420px;
+      width: 100%;
+      box-shadow: 0 20px 40px rgba(15, 23, 42, 0.8);
+      border: 1px solid rgba(148, 163, 184, 0.3);
+    }
+    .title {
+      font-size: 1.4rem;
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+    .subtitle {
+      font-size: 0.9rem;
+      color: #9ca3af;
+      margin-bottom: 16px;
+    }
+    .mood-label {
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: #9ca3af;
+      margin-bottom: 8px;
+    }
+    .mood-buttons {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+    button.mood {
+      border-radius: 999px;
+      padding: 10px 12px;
+      border: none;
+      cursor: pointer;
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: #0b1120;
+      transition: transform 0.08s ease-out, box-shadow 0.08s ease-out, filter 0.1s ease-out;
+    }
+    button.mood:active {
+      transform: translateY(1px) scale(0.98);
+      box-shadow: none;
+      filter: brightness(0.95);
+    }
+    button.mood[data-type="calm"] {
+      background: linear-gradient(135deg, #38bdf8, #4ade80);
+      box-shadow: 0 10px 25px rgba(56, 189, 248, 0.4);
+    }
+    button.mood[data-type="grind"] {
+      background: linear-gradient(135deg, #f97316, #eab308);
+      box-shadow: 0 10px 25px rgba(249, 115, 22, 0.4);
+    }
+    button.mood[data-type="chaos"] {
+      background: linear-gradient(135deg, #f97373, #f97316);
+      box-shadow: 0 10px 25px rgba(248, 113, 113, 0.4);
+    }
+    .streak {
+      display: grid;
+      grid-template-columns: repeat(7, minmax(0, 1fr));
+      gap: 4px;
+      margin-bottom: 8px;
+    }
+    .dot {
+      width: 18px;
+      height: 18px;
+      border-radius: 999px;
+      background: rgba(15, 23, 42, 0.7);
+      border: 1px solid rgba(148, 163, 184, 0.4);
+    }
+    .dot[data-type="calm"] {
+      background: radial-gradient(circle at 30% 30%, #a5f3fc, #0ea5e9);
+    }
+    .dot[data-type="grind"] {
+      background: radial-gradient(circle at 30% 30%, #fed7aa, #ea580c);
+    }
+    .dot[data-type="chaos"] {
+      background: radial-gradient(circle at 30% 30%, #fecaca, #ef4444);
+    }
+    .footer {
+      font-size: 0.75rem;
+      color: #6b7280;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .status {
+      font-weight: 500;
+      color: #a5b4fc;
+    }
+  </style>
+</head>
+<body>
+  <main class="card">
+    <div class="title">Pebble</div>
+    <div class="subtitle">Tap your daily vibe.</div>
+
+    <div class="mood-label">Today&apos;s pebble</div>
+    <div class="mood-buttons">
+      <button class="mood" data-type="calm">Calm</button>
+      <button class="mood" data-type="grind">Grind</button>
+      <button class="mood" data-type="chaos">Chaos</button>
+    </div>
+
+    <div class="mood-label">Last 7 days</div>
+    <div class="streak" id="streak"></div>
+
+    <div class="footer">
+      <span id="status" class="status">No pebble yet.</span>
+      <span id="env-label">web</span>
+    </div>
+  </main>
+
+  <script src="/pebble-ui.js"></script>
+  <script type="module" src="/script.js"></script>
+</body>
+</html>
